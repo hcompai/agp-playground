@@ -31,7 +31,7 @@ export default function Home() {
 
   // Task state
   const [objective, setObjective] = useState(INITIAL_TASK);
-  const [startUrl, setStartUrl] = useState('https://google.com');
+  const [startUrl, setStartUrl] = useState('https://bing.com');
   const [selectedRunMethod, setSelectedRunMethod] = useState<RunMethod>('run');
   const [isRunning, setIsRunning] = useState(false);
   const [result, setResult] = useState<Record<string, unknown> | null>(null);
@@ -400,7 +400,7 @@ ${methodCall}`;
                 type="url"
                 value={startUrl}
                 onChange={(e) => setStartUrl(e.target.value)}
-                placeholder="https://google.com"
+                placeholder="https://bing.com"
                 disabled={!isAuthenticated}
                 className="w-full px-3 py-2 border border-gray-4 rounded-lg text-14-regular-body text-gray-8 placeholder-gray-5 disabled:bg-gray-3 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />

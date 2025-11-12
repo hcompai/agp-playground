@@ -125,6 +125,5 @@ The full license text is available in the `LICENSES/` directory.
 
 ## Learn More
 
-- [Agent Platform Documentation](https://hub.hcompany.ai/)
-- [agp-sdk-js on npm](https://www.npmjs.com/package/agp-sdk-js)
-- [H.AI Platform](https://hcompany.ai)
+- [HUB](https://hub.hcompany.ai/)
+- [H.AI](https://hcompany.ai)

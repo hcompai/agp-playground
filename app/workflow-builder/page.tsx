@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 type WorkflowPattern = 'agent' | 'company-earnings';
 
@@ -142,15 +143,16 @@ ${stepFunctions}`;
   };
 
   return (
-    <div className="min-h-screen bg-background p-8">
+    <div className="min-h-screen bg-canvas-background p-8">
       <div className="max-w-[1600px] mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-4xl font-bold mb-2">Workflow Builder</h1>
-            <p className="text-muted-foreground">
+            <h1 className="text-24-bold-heading text-gray-8">Workflow Builder</h1>
+            <p className="text-14-regular-body text-gray-6 mt-1">
               Chain multiple agent configurations into durable workflows
             </p>
           </div>
+          <div className="flex items-center gap-3">
           <Link href="/">
             <Button variant="outline">
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -159,16 +161,18 @@ ${stepFunctions}`;
               Back to Test Suite
             </Button>
           </Link>
+            <ThemeToggle />
+          </div>
         </div>
 
-        <div className="bg-card border rounded-lg p-6 mb-6">
-          <p className="text-sm text-muted-foreground mb-6">
+        <div className="bg-gray-1 border border-gray-4 rounded-lg shadow p-6 mb-6">
+          <p className="text-14-regular-body text-gray-6 mb-6">
             Build durable, fault-tolerant workflows using{' '}
             <a 
               href="https://useworkflow.dev" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-primary hover:underline"
+              className="text-gray-7 hover:text-gray-8 hover:underline"
             >
               Workflow DevKit
             </a>
@@ -179,7 +183,7 @@ ${stepFunctions}`;
             {/* Left: Step Selection */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-semibold">Workflow Steps</h2>
+                <h2 className="text-24-medium-heading text-gray-8">Workflow Steps</h2>
                 <div className="flex items-center gap-2">
                   <Select
                     value={selectedPattern}
@@ -227,12 +231,12 @@ ${stepFunctions}`;
 
               {selectedPattern === 'agent' ? (
                 selectedWorkflowConfigs.length === 0 ? (
-                  <div className="border-2 border-dashed rounded-lg p-12 text-center">
-                    <svg className="w-16 h-16 mx-auto text-muted-foreground mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="border-2 border-dashed border-gray-4 rounded-lg p-12 text-center">
+                    <svg className="w-16 h-16 mx-auto text-gray-5 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
-                    <p className="text-lg font-medium mb-2">No steps added yet</p>
-                    <p className="text-sm text-muted-foreground mb-4">
+                    <p className="text-18-bold-heading text-gray-8 mb-2">No steps added yet</p>
+                    <p className="text-14-regular-body text-gray-6 mb-4">
                       Add saved configurations to build your workflow
                     </p>
                     <Link href="/">
@@ -246,7 +250,7 @@ ${stepFunctions}`;
                   {selectedWorkflowConfigs.map((config, index) => (
                     <div
                       key={config.id}
-                      className="bg-muted rounded-lg p-4 group"
+                      className="bg-gray-2 rounded-lg p-4 group"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex items-start gap-3 flex-1 min-w-0">
@@ -254,47 +258,47 @@ ${stepFunctions}`;
                             <button
                               onClick={() => handleMoveWorkflowStep(index, index - 1)}
                               disabled={index === 0}
-                              className="p-1 hover:bg-background rounded disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                              className="p-1 hover:bg-gray-1 rounded disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                               aria-label="Move up"
                             >
-                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="w-3 h-3 text-gray-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                               </svg>
                             </button>
                             <button
                               onClick={() => handleMoveWorkflowStep(index, index + 1)}
                               disabled={index === selectedWorkflowConfigs.length - 1}
-                              className="p-1 hover:bg-background rounded disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                              className="p-1 hover:bg-gray-1 rounded disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                               aria-label="Move down"
                             >
-                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="w-3 h-3 text-gray-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                               </svg>
                             </button>
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="text-xs font-mono font-semibold text-muted-foreground bg-background px-2 py-0.5 rounded">
+                              <span className="text-10-mono-medium-heading text-gray-6 bg-gray-1 px-2 py-0.5 rounded">
                                 Step {index + 1}
                               </span>
-                              <span className="text-sm font-semibold truncate">
+                              <span className="text-14-medium-heading text-gray-8 truncate">
                                 {config.name}
                               </span>
                             </div>
-                            <div className="text-xs text-muted-foreground truncate mb-1">
+                            <div className="text-12-regular-body text-gray-6 truncate mb-1">
                               {config.runMethod} • {config.startUrl}
                             </div>
-                            <div className="text-xs text-muted-foreground line-clamp-2">
+                            <div className="text-12-regular-body text-gray-6 line-clamp-2">
                               {config.objective}
                             </div>
                           </div>
                         </div>
                         <button
                           onClick={() => handleRemoveFromWorkflow(config.id)}
-                          className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-destructive/10 rounded transition-all shrink-0"
+                          className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-gray-3 rounded transition-all shrink-0"
                           aria-label="Remove step"
                         >
-                          <svg className="w-4 h-4 text-destructive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-gray-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                           </svg>
                         </button>
@@ -304,28 +308,28 @@ ${stepFunctions}`;
                 </div>
                 )
               ) : (
-                <div className="border-2 border-dashed rounded-lg p-12 text-center">
-                  <svg className="w-16 h-16 mx-auto text-muted-foreground mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="border-2 border-dashed border-gray-4 rounded-lg p-12 text-center">
+                  <svg className="w-16 h-16 mx-auto text-gray-5 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <p className="text-lg font-medium mb-2">Pre-configured Workflow</p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-18-bold-heading text-gray-8 mb-2">Pre-configured Workflow</p>
+                  <p className="text-14-regular-body text-gray-6">
                     This workflow is ready to run with example data. Click "Run Workflow" to test it.
                   </p>
                 </div>
               )}
 
               {selectedPattern === 'agent' && selectedWorkflowConfigs.length > 0 && (
-                <div className="mt-4 p-4 bg-muted/50 rounded-lg">
-                  <h3 className="text-sm font-semibold mb-2">Workflow Summary</h3>
-                  <div className="space-y-1 text-xs text-muted-foreground">
+                <div className="mt-4 p-4 bg-gray-2 rounded-lg">
+                  <h3 className="text-14-medium-heading text-gray-8 mb-2">Workflow Summary</h3>
+                  <div className="space-y-1 text-12-regular-body text-gray-6">
                     <div className="flex justify-between">
                       <span>Total Steps:</span>
-                      <span className="font-medium">{selectedWorkflowConfigs.length}</span>
+                      <span className="font-medium text-gray-7">{selectedWorkflowConfigs.length}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Estimated Duration:</span>
-                      <span className="font-medium">~{selectedWorkflowConfigs.length * 2} minutes</span>
+                      <span className="font-medium text-gray-7">~{selectedWorkflowConfigs.length * 2} minutes</span>
                     </div>
                   </div>
                 </div>
@@ -334,7 +338,7 @@ ${stepFunctions}`;
 
             {/* Right: Generated Code */}
             <div>
-              <h2 className="text-2xl font-semibold mb-4">
+              <h2 className="text-24-medium-heading text-gray-8 mb-4">
                 {selectedPattern === 'agent' ? 'Generated Workflow Code' : 'Workflow Information'}
               </h2>
               {selectedPattern === 'agent' ? (
@@ -342,19 +346,19 @@ ${stepFunctions}`;
                   <CodeBlock code={workflowCode} />
                   
                   {selectedWorkflowConfigs.length > 0 && (
-                <div className="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                <div className="mt-4 p-4 bg-gray-2 border border-gray-4 rounded-lg">
                   <div className="flex items-start gap-2">
-                    <svg className="w-5 h-5 text-primary mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-7 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <div className="text-xs">
-                      <p className="font-medium mb-1">How to use this workflow:</p>
-                      <ol className="list-decimal list-inside space-y-1 text-muted-foreground">
+                    <div className="text-12-regular-body">
+                      <p className="font-medium text-gray-8 mb-1">How to use this workflow:</p>
+                      <ol className="list-decimal list-inside space-y-1 text-gray-6">
                         <li>Copy the generated code above</li>
-                        <li>Create a new file in your project (e.g., <code className="bg-muted px-1 py-0.5 rounded">workflows/my-workflow.ts</code>)</li>
+                        <li>Create a new file in your project (e.g., <code className="bg-gray-3 px-1 py-0.5 rounded text-gray-8">workflows/my-workflow.ts</code>)</li>
                         <li>Paste the code and update the API key</li>
                         <li>Import and call the workflow function</li>
-                        <li>See the <a href="https://useworkflow.dev/docs" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Workflow DevKit docs</a> for more details</li>
+                        <li>See the <a href="https://useworkflow.dev/docs" target="_blank" rel="noopener noreferrer" className="text-gray-7 hover:text-gray-8 hover:underline">Workflow DevKit docs</a> for more details</li>
                       </ol>
                     </div>
                   </div>
@@ -362,20 +366,20 @@ ${stepFunctions}`;
               )}
                 </>
               ) : (
-                <div className="bg-muted rounded-lg p-6">
+                <div className="bg-gray-2 rounded-lg p-6">
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-lg font-semibold mb-2">
+                      <h3 className="text-18-bold-heading text-gray-8 mb-2">
                         {selectedPattern === 'company-earnings' && 'Company Earnings Flow'}
                       </h3>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-14-regular-body text-gray-6">
                         {selectedPattern === 'company-earnings' && 'Finds recent earnings reports and extracts key figures using web agents.'}
                       </p>
                     </div>
                     
-                    <div className="bg-background rounded-lg p-4">
-                      <p className="text-sm font-medium mb-2">This workflow includes:</p>
-                      <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+                    <div className="bg-gray-1 rounded-lg p-4">
+                      <p className="text-14-medium-body text-gray-8 mb-2">This workflow includes:</p>
+                      <ul className="text-14-regular-body text-gray-6 space-y-1 list-disc list-inside">
                         {selectedPattern === 'company-earnings' && (
                           <>
                             <li>Step 1: Search for recent earnings report</li>
@@ -393,38 +397,38 @@ ${stepFunctions}`;
 
         {/* Workflow Results */}
         {result && (
-          <div className="bg-card border rounded-lg p-6 mt-6">
-            <h2 className="text-2xl font-semibold mb-4">Workflow Results</h2>
+          <div className="bg-gray-1 border border-gray-4 rounded-lg shadow p-6 mt-6">
+            <h2 className="text-24-medium-heading text-gray-8 mb-4">Workflow Results</h2>
             
             {result.error ? (
-              <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
+              <div className="bg-gray-3 border border-gray-5 rounded-lg p-4">
                 <div className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-destructive mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-gray-7 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <div>
-                    <p className="font-semibold text-destructive mb-1">Error</p>
+                    <p className="font-semibold text-gray-8 mb-1">Error</p>
                     <p className="text-sm text-muted-foreground">{String(result.error)}</p>
                   </div>
                 </div>
               </div>
             ) : result.runId ? (
               <div className="space-y-4">
-                <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                <div className="bg-gray-2 border border-gray-4 rounded-lg p-4">
                   <div className="flex items-start gap-2">
-                    <svg className="w-5 h-5 text-primary mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-7 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div className="flex-1">
-                      <p className="font-semibold text-primary mb-1">Workflow Started Successfully</p>
-                      <p className="text-sm text-muted-foreground mb-3">
+                      <p className="font-semibold text-gray-8 mb-1">Workflow Started Successfully</p>
+                      <p className="text-14-regular-body text-gray-6 mb-3">
                         Your workflow is running in the background. Use the Workflow DevKit observability UI to monitor progress.
                       </p>
-                      <div className="bg-muted rounded-lg p-3 mb-3">
+                      <div className="bg-gray-3 rounded-lg p-3 mb-3">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-semibold text-muted-foreground">Run ID:</span>
+                          <span className="text-12-medium-body text-gray-6">Run ID:</span>
                         </div>
-                        <code className="text-xs font-mono break-all">{String(result.runId)}</code>
+                        <code className="text-12-mono-regular-body text-gray-8 break-all">{String(result.runId)}</code>
                       </div>
                       <div className="flex items-center gap-2">
                         <Button
@@ -457,11 +461,11 @@ ${stepFunctions}`;
                   </div>
                 </div>
 
-                <div className="bg-muted/50 rounded-lg p-4">
-                  <h3 className="text-sm font-semibold mb-2">How to monitor your workflow:</h3>
-                  <ol className="list-decimal list-inside space-y-1 text-xs text-muted-foreground">
+                <div className="bg-gray-2 rounded-lg p-4">
+                  <h3 className="text-14-medium-heading text-gray-8 mb-2">How to monitor your workflow:</h3>
+                  <ol className="list-decimal list-inside space-y-1 text-12-regular-body text-gray-6">
                     <li>Open a terminal in your project directory</li>
-                    <li>Run: <code className="bg-muted px-1 py-0.5 rounded font-mono">npx workflow inspect runs --web</code></li>
+                    <li>Run: <code className="bg-gray-3 px-1 py-0.5 rounded text-12-mono-regular-body text-gray-8">npx workflow inspect runs --web</code></li>
                     <li>Click on your Run ID to see real-time progress, logs, and step details</li>
                   </ol>
                 </div>

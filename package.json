@@ -10,7 +10,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@h-company/agp-sdk-js": "^0.2.2-alpha.3",
+    "@h-company/agp-sdk-js": "^0.2.2-alpha.4",
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.3",
     "ai": "^5.0.76",

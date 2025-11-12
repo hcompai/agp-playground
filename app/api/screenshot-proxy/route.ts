@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   try {
     const parsedUrl = new URL(imageUrl);
     const isAllowedDomain =
-      parsedUrl.hostname === env.AGP_BASE_URL;
+        parsedUrl.hostname === env.AGP_BASE_URL?.replace('https://', '');
     if (!isAllowedDomain) {
       return new NextResponse('Invalid domain - only AgP URLs allowed', { status: 400 });
     }

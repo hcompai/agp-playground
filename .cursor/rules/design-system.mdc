@@ -1,0 +1,439 @@
+# AgP Playground Design System
+
+This document outlines the design system for the AgP Playground, including color palettes, typography, and usage guidelines.
+
+## Component Primitives Philosophy
+
+**Always prefer using existing component primitives over creating custom inline styles.**
+
+### Core Principles
+
+1. **Use Available Components First**
+   - Before writing custom button, input, or UI element styles, check if a component exists in `components/ui/`
+   - Leverage existing component variants (e.g., `Button` with `variant="ghost"`, `variant="outline"`, etc.)
+   - This ensures consistency, accessibility, and maintainability
+
+2. **When to Add New Variants**
+   - Only add new variants to existing components when there's a clear, reusable pattern
+   - New variants should be added to the base component file, not inline
+   - Ensure the new variant follows the existing design system principles
+   - Document the new variant with examples
+
+3. **When NOT to Add New Variants**
+   - For one-off styling needs, use composition with existing variants
+   - Don't create variants that break the design system (e.g., brand colors for general buttons)
+   - Avoid variants that are too specific to a single use case
+
+### Available Component Primitives
+
+- **Button**: `components/ui/button.tsx`
+  - Variants: `default`, `destructive`, `outline`, `secondary`, `ghost`, `link`
+  - Sizes: `default`, `sm`, `lg`, `icon`
+  
+- **Select**: `components/ui/select.tsx`
+  - Full dropdown component with trigger, content, and item primitives
+
+- **Icons**: `components/icons/`
+  - 160+ pre-built icons, use these instead of inline SVGs
+
+### Examples
+
+**✅ Good - Using Component Primitives:**
+```tsx
+// Using Button component with variants
+<Button variant="ghost" size="sm" onClick={handleSave}>
+  <DownloadIcon className="w-4 h-4" />
+  Save
+</Button>
+
+// Using existing icon component
+import { CheckIcon } from '@/components/icons';
+<CheckIcon className="w-4 h-4 text-gray-6" />
+```
+
+**❌ Bad - Custom Inline Styles:**
+```tsx
+// Don't create custom button styles inline
+<button className="px-3 py-1.5 bg-gray-8 text-gray-1 rounded hover:bg-gray-7">
+  Save
+</button>
+
+// Don't use inline SVG when icon exists
+<svg className="w-4 h-4">...</svg>
+```
+
+**✅ Good - Adding a New Variant:**
+```tsx
+// In components/ui/button.tsx, add to variants object
+variants: {
+  variant: {
+    default: '...',
+    outline: '...',
+    subtle: 'bg-gray-2 text-gray-7 hover:bg-gray-3', // New reusable variant
+  }
+}
+```
+
+**❌ Bad - Over-Specific Variant:**
+```tsx
+// Don't add variants that are too specific
+variants: {
+  variant: {
+    saveButtonInHeaderOnly: '...',  // Too specific!
+  }
+}
+```
+
+## Color System
+
+### Primary Grayscale Palette (Preferred)
+
+**Always use grayscale colors for UI components.** This ensures consistency across light and dark themes.
+
+#### Light Mode
+- `bg-gray-1` / `text-gray-1`: `#ffffff` - Pure white, primary background
+- `bg-gray-2` / `text-gray-2`: `#f7f7f8` - Canvas background (main page background)
+- `bg-gray-3` / `text-gray-3`: `#ececee` - Subtle backgrounds, hover states
+- `bg-gray-4` / `text-gray-4`: `#dcdcdf` - Borders, dividers
+- `bg-gray-5` / `text-gray-5`: `#ccccd1` - Disabled states
+- `bg-gray-6` / `text-gray-6`: `#6b6b70` - Secondary text, muted content
+- `bg-gray-7` / `text-gray-7`: `#3e3e3f` - Primary interactive text
+- `bg-gray-8` / `text-gray-8`: `#1d1d1f` - Headings, high-emphasis text
+
+#### Dark Mode
+- `bg-gray-1` / `text-gray-1`: `#1f1f23` - Primary background
+- `bg-gray-2` / `text-gray-2`: `#2b2d31` - Canvas background
+- `bg-gray-3` / `text-gray-3`: `#38383d` - Subtle backgrounds, hover states
+- `bg-gray-4` / `text-gray-4`: `#47474d` - Borders, dividers
+- `bg-gray-5` / `text-gray-5`: `#56565d` - Disabled states
+- `bg-gray-6` / `text-gray-6`: `#a9a9ad` - Secondary text, muted content
+- `bg-gray-7` / `text-gray-7`: `#d2d2d5` - Primary interactive text
+- `bg-gray-8` / `text-gray-8`: `#f2f2f3` - Headings, high-emphasis text
+
+### Special Background Colors
+
+- `bg-canvas-background`: Main application background
+  - Light: `#f7f7f8`
+  - Dark: `#18181b`
+- `bg-card-background`: Card/modal backgrounds
+  - Light: `#ffffff`
+  - Dark: `#1f1f23`
+
+### Brand Colors
+
+Use sparingly and only for brand-specific elements:
+
+- `bg-h-red` / `text-h-red`: `#ff4800` - H Company red
+- `bg-h-green` / `text-h-green`: `#10c56d` - H Company green
+
+**Note:** Avoid using brand colors for general UI. Prefer grayscale.
+
+### Semantic Color Palettes
+
+Each color has an 8-step scale (1-8), where:
+- **1-3**: Light backgrounds, subtle states
+- **4-5**: Medium backgrounds, borders
+- **6**: Primary color, main interactive elements
+- **7-8**: Dark text, high contrast
+
+Available palettes: `amber`, `blue`, `green`, `magenta`, `orange`, `pink`, `purple`, `red`
+
+Usage: `bg-{color}-{scale}` or `text-{color}-{scale}`
+
+Example: `bg-blue-6`, `text-red-7`
+
+**Use semantic colors only when meaning is critical** (e.g., error states, success indicators).
+
+## Color Usage Guidelines
+
+### ✅ Do
+- Use grayscale colors for all standard UI elements
+- Use `text-gray-8` for headings and high-emphasis content
+- Use `text-gray-6` for secondary/muted text
+- Use `text-gray-7` for interactive elements
+- Use `bg-gray-1` for cards and containers
+- Use `bg-gray-2` or `bg-canvas-background` for main page backgrounds
+- Use `bg-gray-3` for hover states
+- Use `border-gray-4` for borders and dividers
+- Let Tailwind's `dark:` prefix handle theme switching automatically
+
+### ❌ Don't
+- Don't use brand colors (`h-red`, `h-green`) for general UI elements
+- Don't use semantic colors (blue, green, red, etc.) unless conveying specific meaning
+- Don't hardcode colors with hex values or oklch values
+- Don't use `text-primary` or `bg-primary` (these are shadcn defaults, prefer grayscale)
+- Don't mix color systems (stick to grayscale)
+
+### Examples
+
+**Good:**
+```tsx
+// Card with proper grayscale usage
+<div className="bg-gray-1 border border-gray-4 rounded-lg shadow p-6">
+  <h2 className="text-24-medium-heading text-gray-8">Title</h2>
+  <p className="text-14-regular-body text-gray-6">Description</p>
+  <button className="bg-gray-8 text-gray-1 hover:bg-gray-7">
+    Action
+  </button>
+</div>
+
+// Theme-aware icon
+<CheckIcon className="w-4 h-4 text-gray-6" />
+
+// Status indicator with semantic color
+<span className="text-12-medium-body bg-gray-7 text-gray-1">
+  Completed
+</span>
+```
+
+**Bad:**
+```tsx
+// Don't use brand colors for general buttons
+<button className="bg-h-green text-white">Submit</button>
+
+// Don't use semantic colors without meaning
+<div className="bg-blue-3 text-blue-8">Generic Card</div>
+
+// Don't use shadcn defaults
+<span className="text-primary">Text</span>
+
+// Don't hardcode colors
+<div style={{ color: '#3e3e3f' }}>Text</div>
+```
+
+## Typography System
+
+All typography classes follow the pattern: `text-{size}-{weight}-{type}`
+
+### Font Families
+- **Inter**: Primary body text (400-900 weights)
+- **InterDisplay**: Headings and large text (100-900 weights)
+- **GeistMono**: Code and monospace text (100-900 weights)
+
+### Available Typography Classes
+
+#### Body Text
+- `text-9-regular-body`: 9px / 400 / 12px line-height
+- `text-14-regular-body`: 14px / 400 / 20px line-height (most common)
+- `text-14-medium-body`: 14px / 500 / 20px line-height
+- `text-16-regular-body`: 16px / 400 / 24px line-height
+- `text-16-medium-body`: 16px / 500 / 24px line-height
+- `text-24-regular-body`: 24px / 400 / 32px line-height
+- `text-24-medium-body`: 24px / 500 / 32px line-height
+
+#### Headings
+- `text-12-regular-heading`: 12px / 400 / 12px line-height
+- `text-12-medium-heading`: 12px / 500 / 12px line-height
+- `text-14-regular-heading`: 14px / 400 / 16px line-height
+- `text-14-medium-heading`: 14px / 500 / 16px line-height
+- `text-16-regular-heading`: 16px / 400 / 20px line-height
+- `text-16-medium-heading`: 16px / 500 / 20px line-height (section headings)
+- `text-18-bold-heading`: 18px / 700 / 20px line-height
+- `text-24-regular-heading`: 24px / 400 / 28px line-height
+- `text-24-medium-heading`: 24px / 500 / 28px line-height
+- `text-24-bold-heading`: 24px / 700 / 28px line-height (page titles)
+- `text-32-light-heading`: 32px / 300 / 28px line-height
+- `text-36-light-heading`: 36px / 300 / 40px line-height
+- `text-36-bold-heading`: 36px / 700 / 40px line-height
+- `text-64-light-heading`: 64px / 200 / 72px line-height
+
+#### Monospace
+- `text-10-mono-medium-heading`: 10px / 500 / 12px line-height
+- `text-13-mono-regular-heading`: 13px / 400 / 16px line-height
+- `text-13-mono-regular-body`: 13px / 400 / 20px line-height
+- `text-13-mono-medium-heading`: 13px / 500 / 16px line-height
+- `text-13-mono-medium-body`: 13px / 500 / 20px line-height
+
+### Typography Usage Guidelines
+
+#### ✅ Do
+- Use `text-24-bold-heading` for page titles
+- Use `text-24-medium-heading` for main section headings
+- Use `text-16-medium-heading` for subsection headings
+- Use `text-14-regular-body` for standard body text
+- Use `text-14-medium-body` for emphasized body text
+- Use `text-12-regular-heading` for labels and small headings
+- Combine typography classes with color classes: `text-24-bold-heading text-gray-8`
+
+#### ❌ Don't
+- Don't use raw Tailwind text size classes (`text-sm`, `text-base`, etc.)
+- Don't use raw font-weight classes (`font-medium`, `font-bold`, etc.)
+- Don't manually set font-family, use the provided typography classes
+- Don't override line-height or letter-spacing defined in typography classes
+
+### Examples
+
+```tsx
+// Page header
+<div>
+  <h1 className="text-24-bold-heading text-gray-8">
+    AgP Playground
+  </h1>
+  <p className="text-14-regular-body text-gray-6 mt-1">
+    Test and experiment with the Agent Platform SDK
+  </p>
+</div>
+
+// Card with proper typography hierarchy
+<div className="bg-gray-1 rounded-lg shadow p-6">
+  <h2 className="text-24-medium-heading text-gray-8 mb-4">
+    Task Execution
+  </h2>
+  <div>
+    <label className="text-14-medium-heading text-gray-7">
+      Objective
+    </label>
+    <p className="text-14-regular-body text-gray-6 mt-2">
+      Enter your task description here
+    </p>
+  </div>
+</div>
+
+// Button text
+<button className="px-4 py-2 bg-gray-8 text-gray-1 rounded-md">
+  <span className="text-14-medium-body">Run Task</span>
+</button>
+
+// Status badge
+<span className="text-12-medium-body px-2 py-0.5 rounded bg-gray-3 text-gray-8">
+  Running
+</span>
+```
+
+## Component Styling Patterns
+
+### Cards
+```tsx
+<div className="bg-gray-1 border border-gray-4 rounded-lg shadow p-6">
+  {/* Content */}
+</div>
+```
+
+### Buttons (Use Component Primitives)
+
+**Always use the `Button` component instead of raw `<button>` elements.**
+
+**Primary:**
+```tsx
+import { Button } from '@/components/ui/button';
+
+<Button variant="default">
+  Action
+</Button>
+```
+
+**Secondary:**
+```tsx
+<Button variant="secondary">
+  Cancel
+</Button>
+
+// Or with outline style
+<Button variant="outline">
+  Cancel
+</Button>
+```
+
+**Ghost (minimal):**
+```tsx
+<Button variant="ghost" size="sm">
+  <DownloadIcon className="w-4 h-4" />
+  Save
+</Button>
+```
+
+### Inputs
+```tsx
+<input
+  type="text"
+  className="w-full px-3 py-2 border border-gray-4 rounded-md text-14-regular-body focus:outline-none focus:ring-2 focus:ring-gray-6"
+  placeholder="Enter text..."
+/>
+```
+
+### Borders & Dividers
+```tsx
+<div className="border-b border-gray-4" />
+<div className="h-6 w-px bg-gray-4" /> {/* Vertical divider */}
+```
+
+## Theme Support
+
+All colors automatically support dark mode through Tailwind's `dark:` variant. The design system is configured to handle theme switching automatically through CSS variables.
+
+### Best Practices
+- Define colors using the grayscale palette
+- Let the design system handle theme switching automatically
+- Use `dark:` variants only for special cases where automatic switching doesn't work
+
+### Example
+```tsx
+// Automatic theme switching (preferred)
+<div className="bg-gray-1 text-gray-8">Content</div>
+
+// Manual dark mode override (use sparingly)
+<div className="bg-gray-1 dark:bg-gray-2 text-gray-8">Content</div>
+```
+
+## Icon Usage
+
+Import icons from the centralized icon library:
+
+```tsx
+import { CheckIcon, SparkleIcon, DownloadIcon } from '@/components/icons';
+
+// Use with consistent sizing and colors
+<CheckIcon className="w-4 h-4 text-gray-6" />
+<SparkleIcon className="w-5 h-5 text-gray-8" />
+```
+
+Common icon sizes:
+- `w-3 h-3`: Small icons (12px)
+- `w-4 h-4`: Standard icons (16px) - most common
+- `w-5 h-5`: Medium icons (20px)
+- `w-6 h-6`: Large icons (24px)
+
+## Quick Reference
+
+### Most Common Patterns
+
+**⚡ Remember: Use component primitives first! Check `components/ui/` before writing custom styles.**
+
+**Backgrounds:**
+- Main page: `bg-canvas-background`
+- Cards: `bg-gray-1`
+- Hover: `bg-gray-3` or `hover:bg-gray-3`
+
+**Text:**
+- Headings: `text-gray-8`
+- Body: `text-gray-7`
+- Muted: `text-gray-6`
+
+**Borders:**
+- `border-gray-4`
+
+**Buttons (Use `<Button>` component):**
+- Primary: `<Button variant="default">`
+- Secondary: `<Button variant="secondary">` or `<Button variant="outline">`
+- Ghost: `<Button variant="ghost">`
+- Sizes: `size="sm"`, `size="default"`, `size="lg"`
+
+**Typography:**
+- Page titles: `text-24-bold-heading`
+- Section headings: `text-24-medium-heading`
+- Subsections: `text-16-medium-heading`
+- Body text: `text-14-regular-body`
+- Labels: `text-14-medium-heading`
+- Small text: `text-12-regular-heading`
+
+**Icons:**
+- Import from: `@/components/icons`
+- Standard size: `className="w-4 h-4"`
+- With color: `className="w-4 h-4 text-gray-6"`
+
+## Additional Resources
+
+- [Cursor Rules Documentation](https://cursor.com/docs/context/rules)
+- Global styles: `app/globals.css`
+- Component library: `components/ui/`
+- Icon library: `components/icons/`

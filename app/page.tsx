@@ -17,7 +17,8 @@ import EventStream from '@/components/event-stream';
 import { saveConfiguration, type SavedConfiguration } from '@/lib/storage';
 import { env } from '@/env';
 import Link from 'next/link';
-import { SparkleIcon, DownloadIcon } from '@/components/icons';
+import { SparkleIcon, DownloadIcon, CheckIcon } from '@/components/icons';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 type RunMethod = 'run' | 'runAndWait';
 type ViewMode = 'configure' | 'code';
@@ -277,69 +278,63 @@ ${methodCall}`;
   };
 
   return (
-    <div className="min-h-screen bg-gray-2 p-8">
+    <div className="min-h-screen bg-canvas-background p-8">
       <div className="max-w-[1600px] mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-36-bold-heading text-gray-8">
-            AgP Playground
-          </h1>
-          <Link href="/workflow-builder">
-            <Button variant="outline">
-              <SparkleIcon className="w-4 h-4 mr-2" />
-              Workflow Builder
-            </Button>
-          </Link>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-24-bold-heading text-gray-8">
+              AgP Playground
+            </h1>
+            <p className="text-14-regular-body text-gray-6 mt-1">
+              Test and experiment with the Agent Platform SDK
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            {/* API Key Input */}
+            <div className="flex items-center gap-2">
+              {isAuthenticated && (
+                <CheckIcon className="w-4 h-4 text-gray-6" />
+              )}
+              <input
+                type="password"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                placeholder="API Key"
+                disabled={isAuthenticated}
+                className="w-48 px-3 py-1.5 border border-gray-4 rounded-md disabled:bg-gray-3 text-14-regular-body focus:outline-none focus:ring-2 focus:ring-gray-6"
+              />
+              {!isAuthenticated ? (
+                <Button
+                  onClick={initAPIKeyAuth}
+                  variant="default"
+                  size="sm"
+                >
+                  Auth
+                </Button>
+              ) : (
+                <Button
+                  onClick={clearAPIKeyAuth}
+                  variant="outline"
+                  size="sm"
+                >
+                  Clear
+                </Button>
+              )}
+            </div>
+            <div className="h-6 w-px bg-gray-4" /> {/* Divider */}
+            <Link href="/workflow-builder">
+              <Button variant="outline">
+                <SparkleIcon className="w-4 h-4 mr-2" />
+                Workflow Builder
+              </Button>
+            </Link>
+            <ThemeToggle />
+          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-6">
           {/* Left Column - Configuration */}
           <div className="space-y-6">
-            {/* Authentication */}
-            <div className="bg-gray-1 rounded-lg shadow p-6">
-          <h2 className="text-24-medium-heading mb-4 text-gray-8">Authentication</h2>
-          <div className="space-y-4">
-            <div className="border rounded-lg p-4">
-              <h3 className="text-16-medium-heading mb-2 text-gray-7">API Key</h3>
-              <div className="flex gap-2">
-                <input
-                  type="password"
-                  value={apiKey}
-                  onChange={(e) => setApiKey(e.target.value)}
-                  placeholder="Enter API key"
-                  disabled={isAuthenticated}
-                  className="flex-1 px-3 py-2 border rounded disabled:bg-gray-3 text-14-regular-body"
-                />
-                {!isAuthenticated ? (
-                  <Button
-                    onClick={initAPIKeyAuth}
-                    variant="default"
-                  >
-                    Initialize
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={clearAPIKeyAuth}
-                    variant="destructive"
-                  >
-                    Clear
-                  </Button>
-                )}
-              </div>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className={isAuthenticated ? 'text-14-medium-body text-green-600' : 'text-14-regular-body text-gray-6'}>
-                {isAuthenticated ? 'Authenticated' : 'Not authenticated'}
-              </span>
-              {isAuthenticated && (
-                <span className="text-12-regular-heading text-gray-6 flex items-center gap-1">
-                  <DownloadIcon className="w-3 h-3" />
-                  Saved in browser
-                </span>
-              )}
-            </div>
-          </div>
-            </div>
-
             {/* Task Execution */}
             <div className="bg-gray-1 rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-4">
@@ -377,14 +372,15 @@ ${methodCall}`;
                 onLoad={handleLoadConfiguration} 
                 refreshKey={savedConfigKey}
               />
-              <button
+              <Button
                 onClick={() => setIsSaveDialogOpen(true)}
                 disabled={!objective.trim()}
-                className="px-3 py-1.5 text-14-medium-body text-gray-7 hover:text-gray-8 rounded-lg hover:bg-gray-2 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                variant="ghost"
+                size="sm"
               >
                 <DownloadIcon className="w-4 h-4" />
                 Save
-              </button>
+              </Button>
             </div>
           </div>
           
@@ -504,44 +500,32 @@ ${methodCall}`;
           <div className="space-y-6">
             {/* Event Stream */}
             <div className="bg-gray-1 rounded-lg shadow overflow-hidden" style={{ height: '850px' }}>
-          <div className="p-6 border-b border-gray-3">
+          <div className="p-6">
             <div className="flex justify-between items-start mb-4">
               <h2 className="text-24-medium-heading text-gray-8">
                 Event Stream {events.length > 0 && `(${events.length})`}
               </h2>
-              <button
+              <Button
                 onClick={() => setEvents([])}
-                className="text-14-regular-body px-3 py-1 bg-gray-3 text-gray-7 rounded hover:bg-gray-4"
+                variant="secondary"
+                size="sm"
               >
                 Clear Events
-              </button>
+              </Button>
             </div>
 
             {currentTask && (
               <div className="pt-4 border-t border-gray-3">
-                <div className="flex items-start justify-between gap-6 mb-4">
+                <div className="flex items-start justify-between gap-6">
                   <div className="flex-1 space-y-2">
                     <div className="flex items-center gap-3">
-                      <p className="text-12-regular-body text-gray-6">
-                        Task ID: {currentTask.id}
-                      </p>
-                      <span className={`text-12-medium-body px-2 py-0.5 rounded ${
-                        taskStatus === 'running' ? 'bg-blue-100 text-blue-700' :
-                        taskStatus === 'completed' ? 'bg-green-100 text-green-700' :
-                        taskStatus === 'failed' ? 'bg-red-100 text-red-700' :
-                        taskStatus === 'paused' ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-gray-3 text-gray-6'
-                      }`}>
-                        {taskStatus}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-4">
                       {currentTask.liveViewUrl && (
                         <a
                           href={currentTask.liveViewUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-12-regular-body text-blue-600 hover:underline"
+                          className="text-12-regular-body text-gray-7 hover:text-gray-8 hover:underline"
                         >
                           Live View →
                         </a>
@@ -550,15 +534,25 @@ ${methodCall}`;
                         href={`https://surfer.hcompany.ai/surfer-view/${currentTask.id}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-12-regular-body text-blue-600 hover:underline"
+                        className="text-12-regular-body text-gray-7 hover:text-gray-8 hover:underline"
                       >
                         View in Surfer →
                       </a>
                     </div>
+                    </div>
                   </div>
 
                   <div className="flex gap-2">
-                    <button
+                  <span className={`inline-flex items-center justify-center text-12-medium-heading px-3 py-1.5 rounded-md border ${
+                        taskStatus === 'running' ? 'bg-gray-2 text-gray-8 border-gray-4' :
+                        taskStatus === 'completed' ? 'bg-gray-8 text-gray-1 border-gray-8' :
+                        taskStatus === 'failed' ? 'bg-gray-6 text-gray-1 border-gray-7' :
+                        taskStatus === 'paused' ? 'bg-gray-3 text-gray-7 border-gray-4' :
+                        'bg-gray-2 text-gray-6 border-gray-4'
+                      }`}>
+                        {taskStatus}
+                      </span>
+                    <Button
                       onClick={async () => {
                         if (currentTask) {
                           try {
@@ -570,11 +564,12 @@ ${methodCall}`;
                         }
                       }}
                       disabled={taskStatus !== 'running'}
-                      className="px-3 py-1.5 bg-yellow-600 text-white rounded hover:bg-yellow-700 disabled:bg-gray-5 disabled:cursor-not-allowed text-12-medium-body"
+                      variant="secondary"
+                      size="sm"
                     >
                       Pause
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                       onClick={async () => {
                         if (currentTask) {
                           try {
@@ -586,11 +581,12 @@ ${methodCall}`;
                         }
                       }}
                       disabled={taskStatus !== 'paused'}
-                      className="px-3 py-1.5 bg-green-600 text-white rounded hover:bg-green-700 disabled:bg-gray-5 disabled:cursor-not-allowed text-12-medium-body"
+                      variant="secondary"
+                      size="sm"
                     >
                       Resume
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                       onClick={async () => {
                         if (currentTask) {
                           try {
@@ -602,10 +598,11 @@ ${methodCall}`;
                         }
                       }}
                       disabled={!['running', 'paused'].includes(taskStatus)}
-                      className="px-3 py-1.5 bg-red-600 text-white rounded hover:bg-red-700 disabled:bg-gray-5 disabled:cursor-not-allowed text-12-medium-body"
+                      variant="default"
+                      size="sm"
                     >
                       Stop
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>

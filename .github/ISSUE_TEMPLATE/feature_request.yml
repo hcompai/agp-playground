@@ -1,0 +1,157 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for the AgP Playground
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please fill out the information below to help us understand your request.
+
+  - type: checkboxes
+    id: search
+    attributes:
+      label: Search for existing requests
+      description: Please search to see if this feature has already been requested.
+      options:
+        - label: I have searched the existing issues and discussions
+          required: true
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: Feature Type
+      description: What type of feature are you requesting?
+      options:
+        - New UI Component
+        - New Workflow Example
+        - Enhanced Visualization
+        - Better Developer Experience
+        - Performance Improvement
+        - Accessibility Improvement
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Description
+      description: Is your feature request related to a problem? Please describe.
+      placeholder: I find it frustrating when I need to manually check each agent step...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution you'd like to see implemented
+      placeholder: |
+        Add a step-by-step timeline view that shows:
+        - Each action the agent took
+        - Time elapsed between actions
+        - Screenshots at each step
+        - Click to expand for details
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What alternative solutions or features have you considered?
+      placeholder: I considered using the existing event stream, but it doesn't provide a timeline view...
+    validations:
+      required: false
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: Describe a real-world scenario where this feature would be useful
+      placeholder: |
+        When debugging why an agent failed, I need to see exactly what it did at each step.
+        A timeline view would make it easy to spot where things went wrong.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Nice to have
+        - Would be helpful
+        - Important
+        - Critical
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: area
+    attributes:
+      label: Affected Area
+      description: Which part of the playground would this affect?
+      options:
+        - label: Main Playground UI
+        - label: Event Stream
+        - label: Workflow Builder
+        - label: Configuration Management
+        - label: Code Snippet Generator
+        - label: Screenshot Viewer
+        - label: Documentation
+        - label: New Workflow Pattern
+        - label: Developer Experience
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: Mockups or Examples
+      description: If you have any mockups, wireframes, or examples from other tools, please share them
+      placeholder: Drag and drop images here or paste URLs to similar features in other tools
+    validations:
+      required: false
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Ideas
+      description: If you have ideas about how this could be implemented, please share them
+      placeholder: |
+        This could be implemented using:
+        - A new TimelineView component
+        - Process events in chronological order
+        - Use Radix UI Timeline component
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Would you be interested in contributing this feature?
+      options:
+        - label: I would be willing to contribute this feature
+        - label: I need help implementing this
+        - label: I can help with testing
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context about the feature request here
+      placeholder: This would be especially useful for educational purposes...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: breaking
+    attributes:
+      label: Breaking Change
+      description: Would this be a breaking change?
+      options:
+        - label: This might be a breaking change
+

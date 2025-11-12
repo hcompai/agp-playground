@@ -1,0 +1,160 @@
+name: 🐛 Bug Report
+description: Report a bug or issue with the AgP Playground
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this bug! Please fill out the information below to help us resolve it quickly.
+
+  - type: checkboxes
+    id: search
+    attributes:
+      label: Search for existing issues
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing issues
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: When I click the "Run Task" button, the event stream doesn't update...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Go to the main playground page
+        2. Enter API key and initialize
+        3. Set objective to "Search for AI news"
+        4. Click "Run Task"
+        5. See error in console
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen
+      placeholder: The event stream should start showing real-time events...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened
+      placeholder: The event stream remains empty and an error appears in the console...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected Area
+      description: Which part of the playground is affected?
+      options:
+        - Main Playground UI
+        - Event Stream
+        - Workflow Builder
+        - Configuration Save/Load
+        - Code Snippet Generator
+        - Screenshot Viewer
+        - Theme Switching
+        - API Integration
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      description: Which browser are you using?
+      placeholder: Chrome 120.0.6099.109
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      description: Which OS are you using?
+      placeholder: macOS 14.1 (Sonoma)
+    validations:
+      required: true
+
+  - type: input
+    id: nodejs
+    attributes:
+      label: Node.js Version
+      description: What version of Node.js are you running? (run `node --version`)
+      placeholder: v20.10.0
+    validations:
+      required: true
+
+  - type: input
+    id: sdk-version
+    attributes:
+      label: SDK Version
+      description: What version of @h-company/agp-sdk-js are you using?
+      placeholder: 0.2.2-alpha.3
+    validations:
+      required: false
+
+  - type: textarea
+    id: console-logs
+    attributes:
+      label: Console Logs
+      description: Any relevant console errors or logs (open browser DevTools)
+      placeholder: |
+        TypeError: Cannot read property 'status' of undefined
+          at EventStream.tsx:45
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain the problem
+      placeholder: Drag and drop images here or paste image URLs
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here
+      placeholder: This only happens when using dark mode...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: mobile
+    attributes:
+      label: Mobile Device
+      description: Does this occur on mobile?
+      options:
+        - label: This issue occurs on mobile devices
+
+  - type: checkboxes
+    id: workflow-builder
+    attributes:
+      label: Workflow Builder
+      description: Is this related to the Workflow Builder?
+      options:
+        - label: This issue is related to the Workflow Builder
+

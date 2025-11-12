@@ -1,0 +1,13 @@
+# npm Configuration for Package Access - currently only available on request
+# 
+# Copy this file to .npmrc in your project root and set the NPM_TOKEN 
+# environment variable with your read-only access token.
+#
+# Setup:
+# 1. Copy: cp .npmrc.example .npmrc
+# 2. Set token: export NPM_TOKEN=npm_your_token_here
+# 3. Install: npm install @h-company/agp-sdk-js
+#
+
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
+

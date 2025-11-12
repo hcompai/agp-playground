@@ -1,0 +1,1153 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+@source "../node_modules/streamdown/dist/index.js";
+
+:root {
+  --radius: 0.625rem;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --canvas-background: #f7f7f8;
+  --card-background: #ffffff;
+  --app-icon-background: #ffffff;
+
+  --h-red: #ff4800;
+  --h-green: #10c56d;
+  /* Light mode variables */
+  --gray-1: #ffffff;
+  --gray-2: #f7f7f8;
+  --gray-3: #ececee;
+  --gray-4: #dcdcdf;
+  --gray-5: #ccccd1;
+  --gray-6: #6b6b70;
+  --gray-7: #3e3e3f;
+  --gray-8: #1d1d1f;
+
+  /* Light color palette */
+  --amber-1: #fefdfb;
+  --amber-2: #fff6e5;
+  --amber-3: #ffecbc;
+  --amber-4: #ffd386;
+  --amber-5: #ffc766;
+  --amber-6: #ad5700;
+  --amber-7: #85360f;
+  --amber-8: #4e2009;
+
+  --blue-1: #fbfdff;
+  --blue-2: #f0f7ff;
+  --blue-3: #e1f0ff;
+  --blue-4: #b7d9f8;
+  --blue-5: #9dcbf6;
+  --blue-6: #006adc;
+  --blue-7: #00438a;
+  --blue-8: #00254d;
+
+  --green-1: #fbfefc;
+  --green-2: #eefbf2;
+  --green-3: #ddf3e4;
+  --green-4: #afe4ce;
+  --green-5: #98dcc0;
+  --green-6: #18794e;
+  --green-7: #275d47;
+  --green-8: #153226;
+
+  --magenta-1: #fffcfe;
+  --magenta-2: #fff0f9;
+  --magenta-3: #fce5f3;
+  --magenta-4: #f3c6e2;
+  --magenta-5: #edabd4;
+  --magenta-6: #cd1d8d;
+  --magenta-7: #711351;
+  --magenta-8: #3b0a2a;
+
+  --orange-1: #fefcfb;
+  --orange-2: #fef6f1;
+  --orange-3: #ffe8d7;
+  --orange-4: #ffcca7;
+  --orange-5: #ffbb8a;
+  --orange-6: #bd4b00;
+  --orange-7: #76341e;
+  --orange-8: #451e11;
+
+  --pink-1: #fffcfd;
+  --pink-2: #fff0f7;
+  --pink-3: #fce5f0;
+  --pink-4: #f4c6db;
+  --pink-5: #efaecc;
+  --pink-6: #d31e66;
+  --pink-7: #721836;
+  --pink-8: #3d0d1d;
+
+  --purple-1: #fefcfe;
+  --purple-2: #f9f0ff;
+  --purple-3: #f3e7fc;
+  --purple-4: #e3ccf4;
+  --purple-5: #d6b3ef;
+  --purple-6: #793aaf;
+  --purple-7: #4b1876;
+  --purple-8: #2b0e44;
+
+  --red-1: #fffcfc;
+  --red-2: #fff0f0;
+  --red-3: #ffe5e5;
+  --red-4: #f9c6c6;
+  --red-5: #f6acac;
+  --red-6: #cd2b31;
+  --red-7: #672328;
+  --red-8: #381316;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-canvas-background: var(--canvas-background);
+  --color-card-background: var(--card-background);
+  --color-app-icon-background: var(--app-icon-background);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Custom colours */
+  --color-h-red: var(--h-red);
+  --color-h-green: var(--h-green);
+  --color-gray-1: var(--gray-1);
+  --color-gray-2: var(--gray-2);
+  --color-gray-3: var(--gray-3);
+  --color-gray-4: var(--gray-4);
+  --color-gray-5: var(--gray-5);
+  --color-gray-6: var(--gray-6);
+  --color-gray-7: var(--gray-7);
+  --color-gray-8: var(--gray-8);
+  --color-amber-1: var(--amber-1);
+  --color-amber-2: var(--amber-2);
+  --color-amber-3: var(--amber-3);
+  --color-amber-4: var(--amber-4);
+  --color-amber-5: var(--amber-5);
+  --color-amber-6: var(--amber-6);
+  --color-amber-7: var(--amber-7);
+  --color-amber-8: var(--amber-8);
+  --color-blue-1: var(--blue-1);
+  --color-blue-2: var(--blue-2);
+  --color-blue-3: var(--blue-3);
+  --color-blue-4: var(--blue-4);
+  --color-blue-5: var(--blue-5);
+  --color-blue-6: var(--blue-6);
+  --color-blue-7: var(--blue-7);
+  --color-blue-8: var(--blue-8);
+  --color-green-1: var(--green-1);
+  --color-green-2: var(--green-2);
+  --color-green-3: var(--green-3);
+  --color-green-4: var(--green-4);
+  --color-green-5: var(--green-5);
+  --color-green-6: var(--green-6);
+  --color-green-7: var(--green-7);
+  --color-green-8: var(--green-8);
+  --color-magenta-1: var(--magenta-1);
+  --color-magenta-2: var(--magenta-2);
+  --color-magenta-3: var(--magenta-3);
+  --color-magenta-4: var(--magenta-4);
+  --color-magenta-5: var(--magenta-5);
+  --color-magenta-6: var(--magenta-6);
+  --color-magenta-7: var(--magenta-7);
+  --color-magenta-8: var(--magenta-8);
+  --color-orange-1: var(--orange-1);
+  --color-orange-2: var(--orange-2);
+  --color-orange-3: var(--orange-3);
+  --color-orange-4: var(--orange-4);
+  --color-orange-5: var(--orange-5);
+  --color-orange-6: var(--orange-6);
+  --color-orange-7: var(--orange-7);
+  --color-orange-8: var(--orange-8);
+  --color-pink-1: var(--pink-1);
+  --color-pink-2: var(--pink-2);
+  --color-pink-3: var(--pink-3);
+  --color-pink-4: var(--pink-4);
+  --color-pink-5: var(--pink-5);
+  --color-pink-6: var(--pink-6);
+  --color-pink-7: var(--pink-7);
+  --color-pink-8: var(--pink-8);
+  --color-purple-1: var(--purple-1);
+  --color-purple-2: var(--purple-2);
+  --color-purple-3: var(--purple-3);
+  --color-purple-4: var(--purple-4);
+  --color-purple-5: var(--purple-5);
+  --color-purple-6: var(--purple-6);
+  --color-purple-7: var(--purple-7);
+  --color-purple-8: var(--purple-8);
+  --color-red-1: var(--red-1);
+  --color-red-2: var(--red-2);
+  --color-red-3: var(--red-3);
+  --color-red-4: var(--red-4);
+  --color-red-5: var(--red-5);
+  --color-red-6: var(--red-6);
+  --color-red-7: var(--red-7);
+  --color-red-8: var(--red-8);
+}
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+  --canvas-background: #18181b;
+  /* card-background does not seem correct to me */
+  --card-background: #1f1f23;
+  --app-icon-background: #38383d;
+
+  --h-red: #ff4800;
+  --h-green: #10c56d;
+
+  /* Dark mode variables */
+  --gray-1: #1f1f23;
+  --gray-2: #2b2d31;
+  --gray-3: #38383d;
+  --gray-4: #47474d;
+  --gray-5: #56565d;
+  --gray-6: #a9a9ad;
+  --gray-7: #d2d2d5;
+  --gray-8: #f2f2f3;
+
+  /* Dark color palette */
+  --amber-1: #1f1300;
+  --amber-2: #271700;
+  --amber-3: #3f2200;
+  --amber-4: #573300;
+  --amber-5: #754400;
+  --amber-6: #f1a10d;
+  --amber-7: #fcdea1;
+  --amber-8: #fef3dd;
+
+  --blue-1: #0f1720;
+  --blue-2: #0f1b2d;
+  --blue-3: #102a4c;
+  --blue-4: #0d3868;
+  --blue-5: #104783;
+  --blue-6: #52a9ff;
+  --blue-7: #addcff;
+  --blue-8: #eaf6ff;
+
+  --green-1: #0d1912;
+  --green-2: #0c1f17;
+  --green-3: #113123;
+  --green-4: #164430;
+  --green-5: #1e5c41;
+  --green-6: #4cc38a;
+  --green-7: #aff3c2;
+  --green-8: #e5fbeb;
+
+  --magenta-1: #1f121b;
+  --magenta-2: #271421;
+  --magenta-3: #451a37;
+  --magenta-4: #601d48;
+  --magenta-5: #79255b;
+  --magenta-6: #f65cb6;
+  --magenta-7: #fbb1e0;
+  --magenta-8: #feebf7;
+
+  --orange-1: #1f1206;
+  --orange-2: #2b1400;
+  --orange-3: #441f04;
+  --orange-4: #5f2a06;
+  --orange-5: #7d3708;
+  --orange-6: #ff8b3e;
+  --orange-7: #fcc5a1;
+  --orange-8: #feeadd;
+
+  --pink-1: #1d1418;
+  --pink-2: #27141c;
+  --pink-3: #481a2d;
+  --pink-4: #641d3b;
+  --pink-5: #7b2448;
+  --pink-6: #f76190;
+  --pink-7: #fbb1d2;
+  --pink-8: #feecf4;
+
+  --purple-1: #1b141d;
+  --purple-2: #221527;
+  --purple-3: #3a1e48;
+  --purple-4: #4e2667;
+  --purple-5: #5d2d7b;
+  --purple-6: #bf7af0;
+  --purple-7: #e1b9f4;
+  --purple-8: #f7ecfc;
+
+  --red-1: #1f1315;
+  --red-2: #291415;
+  --red-3: #481a1d;
+  --red-4: #671e22;
+  --red-5: #7e252a;
+  --red-6: #ff6369;
+  --red-7: #fbb1ba;
+  --red-8: #feecee;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-gray-1 text-foreground;
+  }
+  button {
+    @apply cursor-pointer;
+  }
+}
+
+/* Ensure all buttons have cursor-pointer with higher specificity */
+button,
+[role="button"],
+.btn,
+[type="button"],
+[type="submit"],
+[type="reset"] {
+  cursor: pointer !important;
+}
+
+/* Font Face Declarations */
+/* GeistMono Fonts */
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/GeistMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/GeistMono-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/GeistMono-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/GeistMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/GeistMono-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/GeistMono-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/GeistMono-UltraBlack.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/GeistMono-UltraLight.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Inter Fonts */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-ThinItalic.woff2") format("woff2");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-ExtraLight.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-ExtraLightItalic.woff2") format("woff2");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-LightItalic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-SemiBoldItalic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-ExtraBoldItalic.woff2") format("woff2");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-BlackItalic.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* InterDisplay Fonts */
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-ThinItalic.woff2") format("woff2");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-ExtraLight.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-ExtraLightItalic.woff2") format("woff2");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-LightItalic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-SemiBoldItalic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-ExtraBoldItalic.woff2") format("woff2");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterDisplay";
+  src: url("/fonts/InterDisplay-BlackItalic.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Typography Classes */
+
+/* 9 Regular Body */
+.text-9-regular-body {
+  font-family: "Inter", sans-serif;
+  font-size: 0.5625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 0.75rem; /* 133.333% */
+  letter-spacing: -0.00338rem;
+}
+
+/* 10 Mono Medium Heading */
+.text-10-mono-medium-heading {
+  font-family: "GeistMono", monospace;
+  font-size: 0.625rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 0.75rem; /* 120% */
+  letter-spacing: -0.00375rem;
+}
+
+/* 12 Regular Heading */
+.text-12-regular-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 0.75rem; /* 100% */
+}
+
+/* 12 Medium Heading */
+.text-12-medium-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 0.75rem; /* 100% */
+}
+
+.font-12-medium-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 0.75rem; /* 100% */
+}
+
+/* 13 Mono Regular Heading */
+.text-13-mono-regular-heading {
+  font-family: "GeistMono", monospace;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem; /* 123.077% */
+  letter-spacing: -0.00488rem;
+}
+
+/* 13 Mono Regular Body */
+.text-13-mono-regular-body {
+  font-family: "GeistMono", monospace;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem; /* 153.846% */
+  letter-spacing: -0.00488rem;
+}
+
+/* 13 Mono Medium Heading */
+.text-13-mono-medium-heading {
+  font-family: "GeistMono", monospace;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1rem; /* 123.077% */
+  letter-spacing: -0.00488rem;
+}
+
+/* 13 Mono Medium Body */
+.text-13-mono-medium-body {
+  font-family: "GeistMono", monospace;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25rem; /* 153.846% */
+  letter-spacing: -0.00488rem;
+}
+
+/* 14 Regular Heading */
+.text-14-regular-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem; /* 114.286% */
+  letter-spacing: -0.00525rem;
+}
+
+/* 14 Regular Body */
+.text-14-regular-body {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem; /* 142.857% */
+  letter-spacing: -0.00525rem;
+}
+
+/* 14 Medium Heading */
+.text-14-medium-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1rem; /* 114.286% */
+  letter-spacing: -0.00525rem;
+}
+
+.font-14-medium-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1rem; /* 114.286% */
+  letter-spacing: -0.00525rem;
+}
+
+/* 14 Medium Body */
+.text-14-medium-body {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25rem; /* 142.857% */
+  letter-spacing: -0.00525rem;
+}
+
+/* 16 Regular Heading */
+.text-16-regular-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem; /* 125% */
+  letter-spacing: -0.011rem;
+}
+
+/* 16 Regular Body */
+.text-16-regular-body {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem; /* 150% */
+  letter-spacing: -0.011rem;
+}
+
+/* 16 Medium Heading */
+.text-16-medium-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25rem; /* 125% */
+  letter-spacing: -0.011rem;
+}
+
+/* 16 Medium Body */
+.text-16-medium-body {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem; /* 150% */
+  letter-spacing: -0.011rem;
+}
+
+/* 18 Bold Heading */
+.text-18-bold-heading {
+  font-family: "InterDisplay", sans-serif;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.25rem; /* 111.111% */
+  font-feature-settings:
+    "ss07" on,
+    "cv10" on;
+}
+
+/* 24 Regular Heading */
+.text-24-regular-heading {
+  font-family: "InterDisplay", sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.75rem; /* 116.667% */
+  font-feature-settings:
+    "ss07" on,
+    "cv10" on;
+}
+
+/* 24 Regular Body */
+.text-24-regular-body {
+  font-family: "InterDisplay", sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem; /* 133.333% */
+  font-feature-settings:
+    "ss07" on,
+    "cv10" on;
+}
+
+/* 24 Medium Heading */
+.text-24-medium-heading {
+  font-family: "InterDisplay", sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.75rem; /* 116.667% */
+  font-feature-settings:
+    "ss07" on,
+    "cv10" on;
+}
+
+/* 24 Medium Body */
+.text-24-medium-body {
+  font-family: "InterDisplay", sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2rem; /* 133.333% */
+  font-feature-settings:
+    "ss07" on,
+    "cv10" on;
+}
+
+/* 24 Bold Heading */
+.text-24-bold-heading {
+  font-family: "InterDisplay", sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.75rem; /* 116.667% */
+  letter-spacing: -0.015rem;
+  font-feature-settings:
+    "ss07" on,
+    "cv10" on;
+}
+
+/* 36 Bold Heading */
+.text-36-bold-heading {
+  font-family: "InterDisplay", sans-serif;
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.5rem; /* 111.111% */
+  letter-spacing: -0.045rem;
+  font-feature-settings:
+    "ss07" on,
+    "cv10" on;
+}
+
+/* 32 Light Heading */
+.text-32-light-heading {
+  text-align: center;
+  font-feature-settings:
+    "ss07" on,
+    "cv10" on;
+  font-family: "InterDisplay", sans-serif;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 28px; /* 87.5% */
+  letter-spacing: -0.32px;
+}
+
+.text-36-light-heading {
+  font-family: "InterDisplay", sans-serif;
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 2.5rem; /* 111.111% */
+  letter-spacing: 0;
+  font-feature-settings:
+    "ss07" on,
+    "cv10" on;
+}
+
+.text-64-light-heading {
+  font-family: "InterDisplay", sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 200;
+  line-height: 4.5rem; /* 112.5% */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Standard scrollbar - minimal thumb only, no track background */
+.objective-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-4) transparent;
+}
+.objective-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.objective-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.objective-scroll::-webkit-scrollbar-thumb {
+  background: var(--gray-4);
+  border-radius: 2px;
+}
+.objective-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-5);
+}
+
+html,
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile viewport height fixes */
+.h-dvh {
+  height: 100vh; /* Fallback for browsers without dvh support */
+  height: 100dvh; /* Dynamic viewport height - excludes mobile browser UI */
+}
+
+/* Enhanced mobile viewport support */
+@supports (height: 100dvh) {
+  .h-screen {
+    height: 100dvh;
+  }
+}
+
+.floating-shadow-1 {
+  box-shadow: 0px 2px 16px -2px rgba(0, 0, 0, 0.04);
+}
+
+/* Toast animations */
+@keyframes enter {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes leave {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-enter {
+  animation: enter 0.3s ease-out;
+}
+
+.animate-leave {
+  animation: leave 0.2s ease-in forwards;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

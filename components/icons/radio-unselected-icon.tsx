@@ -1,0 +1,19 @@
+export function RadioUnselectedIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 20 20"
+      fill="none"
+      className={className}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M10.0001 3.14998C6.21695 3.14998 3.1501 6.21682 3.1501 9.99998C3.1501 13.7831 6.21695 16.85 10.0001 16.85C13.7832 16.85 16.8501 13.7831 16.8501 9.99998C16.8501 6.21682 13.7832 3.14998 10.0001 3.14998ZM1.8501 9.99998C1.8501 5.49885 5.49898 1.84998 10.0001 1.84998C14.5012 1.84998 18.1501 5.49885 18.1501 9.99998C18.1501 14.5011 14.5012 18.15 10.0001 18.15C5.49898 18.15 1.8501 14.5011 1.8501 9.99998Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}

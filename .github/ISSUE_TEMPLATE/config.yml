@@ -1,0 +1,15 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/hcompai/agp-playground/discussions
+    about: Ask questions, share ideas, and connect with the community
+  - name: 📚 Documentation
+    url: https://github.com/hcompai/agp-playground#readme
+    about: Read the README and setup guide
+  - name: 💡 Workflow Examples
+    url: https://github.com/hcompai/agp-playground/discussions/categories/workflow-examples
+    about: Share and discuss agent workflow patterns
+  - name: 🔐 Security Issue
+    url: https://github.com/hcompai/agp-playground/security/advisories/new
+    about: Report a security vulnerability privately
+

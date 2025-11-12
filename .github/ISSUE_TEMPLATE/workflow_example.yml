@@ -1,0 +1,150 @@
+name: 🔄 Workflow Example Suggestion
+description: Suggest a new workflow pattern or example for the playground
+title: "[Workflow]: "
+labels: ["workflow-example", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a workflow example! These help other developers learn agent automation patterns.
+
+  - type: input
+    id: workflow-name
+    attributes:
+      label: Workflow Name
+      description: What would you call this workflow pattern?
+      placeholder: Multi-agent collaboration workflow
+    validations:
+      required: true
+
+  - type: dropdown
+    id: pattern-type
+    attributes:
+      label: Pattern Type
+      description: What type of workflow pattern is this?
+      options:
+        - Sequential (one step after another)
+        - Parallel (multiple steps at once)
+        - Conditional (branching based on results)
+        - Iterative (loop until condition met)
+        - Orchestrator (coordinator + workers)
+        - Map-Reduce (process many items)
+        - Human-in-the-loop (requires user input)
+        - Error Recovery (retry/fallback patterns)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: What problem does this workflow solve? When would someone use it?
+      placeholder: |
+        This workflow is useful when you need to process multiple websites simultaneously
+        and combine the results. For example, comparing product prices across different
+        e-commerce sites or gathering news from multiple sources.
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Workflow Description
+      description: Describe how the workflow works step by step
+      placeholder: |
+        1. Accept a list of URLs as input
+        2. Create parallel agent tasks for each URL
+        3. Each agent extracts specific information
+        4. Combine all results into a single report
+        5. Return the aggregated data
+    validations:
+      required: true
+
+  - type: textarea
+    id: code-sample
+    attributes:
+      label: Code Sample (Optional)
+      description: If you have sample code, please share it
+      placeholder: |
+        ```typescript
+        export async function multiSiteComparison(urls: string[]) {
+          "use workflow";
+          
+          const results = await Promise.all(
+            urls.map(url => extractData(url))
+          );
+          
+          return combineResults(results);
+        }
+        ```
+      render: typescript
+    validations:
+      required: false
+
+  - type: textarea
+    id: example-input
+    attributes:
+      label: Example Input
+      description: What would the input look like?
+      placeholder: |
+        {
+          "urls": ["https://site1.com", "https://site2.com"],
+          "dataToExtract": "product prices"
+        }
+    validations:
+      required: false
+
+  - type: textarea
+    id: example-output
+    attributes:
+      label: Example Output
+      description: What would the expected output look like?
+      placeholder: |
+        {
+          "site1": { "price": "$29.99" },
+          "site2": { "price": "$27.99" },
+          "cheapest": "site2"
+        }
+    validations:
+      required: false
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Complexity Level
+      description: How complex is this workflow for beginners?
+      options:
+        - Beginner (simple, good starting point)
+        - Intermediate (requires some experience)
+        - Advanced (complex pattern)
+    validations:
+      required: true
+
+  - type: textarea
+    id: similar-patterns
+    attributes:
+      label: Similar Patterns
+      description: Are there similar workflow patterns in other tools or frameworks?
+      placeholder: Similar to Apache Airflow's parallel task execution...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Implementation
+      options:
+        - label: I can provide a complete implementation
+        - label: I can help with implementation
+        - label: I need help implementing this
+        - label: I just want to suggest the idea
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other information that would be helpful
+    validations:
+      required: false
+

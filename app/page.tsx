@@ -23,7 +23,7 @@ import { ThemeToggle } from '@/components/theme-toggle';
 type RunMethod = 'run' | 'runAndWait';
 type ViewMode = 'configure' | 'code';
 
-const INITIAL_TASK = "Search for H Company's latest blog posts and summarize the key findings";
+const INITIAL_TASK = "Explore H Company's website to discover their recent blog posts, click on the latest post and read to the bottom of the page. Summarize the interesting findings and explain why they're significant for the AI and automation industry.";
 
 export default function Home() {
   // Auth state
@@ -32,7 +32,7 @@ export default function Home() {
 
   // Task state
   const [objective, setObjective] = useState(INITIAL_TASK);
-  const [startUrl, setStartUrl] = useState('https://bing.com');
+  const [startUrl, setStartUrl] = useState('https://hcompany.ai');
   const [selectedRunMethod, setSelectedRunMethod] = useState<RunMethod>('run');
   const [isRunning, setIsRunning] = useState(false);
   const [result, setResult] = useState<Record<string, unknown> | null>(null);
@@ -396,7 +396,7 @@ ${methodCall}`;
                 type="url"
                 value={startUrl}
                 onChange={(e) => setStartUrl(e.target.value)}
-                placeholder="https://bing.com"
+                placeholder="https://hcompany.ai"
                 disabled={!isAuthenticated}
                 className="w-full px-3 py-2 border border-gray-4 rounded-lg text-14-regular-body text-gray-8 placeholder-gray-5 disabled:bg-gray-3 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />

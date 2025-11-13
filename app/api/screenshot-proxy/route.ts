@@ -12,8 +12,11 @@ export async function GET(request: NextRequest) {
 
   try {
     const parsedUrl = new URL(imageUrl);
+    const trustedBase = new URL(env.AGP_BASE_URL);
     const isAllowedDomain =
-        parsedUrl.hostname === env.AGP_BASE_URL?.replace('https://', '');
+        parsedUrl.protocol === 'https:' &&
+        parsedUrl.hostname === trustedBase.hostname &&
+        (trustedBase.port ? parsedUrl.port === trustedBase.port : true);
     if (!isAllowedDomain) {
       return new NextResponse('Invalid domain - only AgP URLs allowed', { status: 400 });
     }

@@ -1,4 +1,8 @@
 import { WebAgent } from '@h-company/agp-sdk-js';
+import { env } from '@/env';
+
+const AGENT_PLATFORM_URL = env.AGP_BASE_URL;
+const AGP_API_KEY = env.AGP_API_KEY;
 
 export async function executeAgentWorkflow(
   configs: Array<{
@@ -6,16 +10,14 @@ export async function executeAgentWorkflow(
     objective: string;
     startUrl: string;
     runMethod: 'run' | 'runAndWait' | 'runStepByStep';
-  }>,
-  agentConfig: { apiKey?: string; agentPlatformUrl: string }
+  }>
 ) {
   'use workflow';
 
   const results = [];
 
   for (const config of configs) {
-    // Pass agentConfig instead of agent instance (must be serializable)
-    const stepResult = await executeAgentStep(config, agentConfig);
+    const stepResult = await executeAgentStep(config);
     results.push(stepResult);
   }
 
@@ -31,15 +33,14 @@ async function executeAgentStep(
     objective: string;
     startUrl: string;
     runMethod: 'run' | 'runAndWait' | 'runStepByStep';
-  },
-  agentConfig: { apiKey?: string; agentPlatformUrl: string }
+  }
 ) {
   'use step';
 
-  // Create agent inside the step (can't pass class instances to steps)
-  const agent = agentConfig.apiKey
-    ? new WebAgent({ apiKey: agentConfig.apiKey, baseUrl: agentConfig.agentPlatformUrl })
-    : new WebAgent({ baseUrl: agentConfig.agentPlatformUrl });
+  // Access env variables directly in the step
+  const agent = AGP_API_KEY
+    ? new WebAgent({ apiKey: AGP_API_KEY, baseUrl: AGENT_PLATFORM_URL })
+    : new WebAgent({ baseUrl: AGENT_PLATFORM_URL });
 
   let task;
 

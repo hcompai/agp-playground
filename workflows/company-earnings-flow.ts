@@ -12,14 +12,8 @@ export async function companyEarningsFlow(input: string) {
     throw new Error('AGP_API_KEY is not set');
   }
 
-  // Pass serializable config, not class instances
-  const agentConfig = {
-    baseUrl: AGENT_PLATFORM_URL,
-    apiKey: AGP_API_KEY
-  };
-
-  const result1 = await findEarningsReport(input, agentConfig);
-  const result2 = await extractKeyFigures(result1, agentConfig);
+  const result1 = await findEarningsReport(input);
+  const result2 = await extractKeyFigures(result1);
 
   return {
     step1: result1,
@@ -28,13 +22,13 @@ export async function companyEarningsFlow(input: string) {
   };
 }
 
-async function findEarningsReport(input: string, agentConfig: { baseUrl: string; apiKey: string }) {
+async function findEarningsReport(input: string) {
   'use step';
 
-  // Create agent inside the step (can't pass class instances to steps)
+  // Access env variables directly in the step
   const agent = new WebAgent({
-    baseUrl: agentConfig.baseUrl,
-    apiKey: agentConfig.apiKey
+    baseUrl: AGENT_PLATFORM_URL,
+    apiKey: AGP_API_KEY
   });
 
   const task = await agent.runAndWait(
@@ -62,18 +56,17 @@ async function findEarningsReport(input: string, agentConfig: { baseUrl: string;
 }
 
 async function extractKeyFigures(
-  previousResult: { taskId: string; status: string; answer: string },
-  agentConfig: { baseUrl: string; apiKey: string }
+  previousResult: { taskId: string; status: string; answer: string }
 ) {
   'use step';
 
   // Use the answer from the previous step
   const previousAnswer = previousResult.answer;
 
-  // Create agent inside the step (can't pass class instances to steps)
+  // Access env variables directly in the step
   const agent = new WebAgent({
-    baseUrl: agentConfig.baseUrl,
-    apiKey: agentConfig.apiKey
+    baseUrl: AGENT_PLATFORM_URL,
+    apiKey: AGP_API_KEY
   });
 
   const task = await agent.runAndWait(

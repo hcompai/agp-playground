@@ -2,6 +2,8 @@
 
 An interactive playground for working with hcompany agents. This application provides a user-friendly interface to run web automation agents, view real-time events, and experiment with different SDK methods.
 
+![AgP Playground Demo](public/playground-demo.png)
+
 ## Features
 
 - **Multiple Run Methods** - Test different SDK execution patterns:

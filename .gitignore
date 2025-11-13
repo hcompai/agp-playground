@@ -66,6 +66,9 @@ pids
 # npm credentials (private package access)
 .npmrc
 
+package-lock.json
+pnpm-lock.yaml
+
 # Test files
 *.test.js
 *.spec.js
